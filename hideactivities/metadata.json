@@ -1,0 +1,16 @@
+{
+  "description": "Hides the Activities button from the status bar.",
+  "name": "Hide Activities Button",
+  "shell-version": [
+    "3.10",
+    "3.12",
+    "3.14",
+    "3.16",
+    "3.18",
+    "3.20",
+    "3.22"
+  ],
+  "url": "https://github.com/lvitals/gnome-shell-extensions",
+  "uuid": "hideactivities@leavitals@gmail.com",
+  "version": 6
+}

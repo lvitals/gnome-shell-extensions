@@ -1,0 +1,16 @@
+{
+  "description": "Remove round corners on topbar.",
+  "name": "Straight Top Bar",
+  "shell-version": [
+    "3.12.1",
+    "3.12.2",
+    "3.14",
+    "3.16",
+    "3.18",
+	  "3.20",
+	  "3.22"
+  ],
+  "url": "https://github.com/lvitals/gnome-shell-extensions",
+  "uuid": "straighttopbar@leavitals@gmail.com",
+  "version": 6
+}
