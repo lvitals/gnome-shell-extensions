@@ -1,13 +1,13 @@
 # Install directory
 EXT_DIR=$(HOME)/.local/share/gnome-shell/extensions
-EXT_NAME=gradienttopbar@leavitals.gmail.com
+EXT_NAME=topicons@leavitals.gmail.com
 
 .PHONY: build clean install uninstall fetch-updates update default
 
 build:
 	mkdir -vp build
-	cp -vr stylesheet.css extension.js metadata.json build
-	#glib-compile-schemas build/schemas
+	cp -vr schemas convenience.js extension.js metadata.json prefs.js build
+	glib-compile-schemas build/schemas
 
 clean:
 	rm -vrf build

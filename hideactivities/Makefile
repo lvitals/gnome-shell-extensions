@@ -1,6 +1,6 @@
 # Install directory
 EXT_DIR=$(HOME)/.local/share/gnome-shell/extensions
-EXT_NAME=hideactivities@leavitals@gmail.com
+EXT_NAME=hideactivities@leavitals.gmail.com
 
 .PHONY: build clean install uninstall fetch-updates update default
 

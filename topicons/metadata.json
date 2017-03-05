@@ -1,0 +1,17 @@
+{
+	"description": "Shows legacy tray icons in the top bar.",
+  "name": "Top Icons",
+  "shell-version": [
+    "3.12",
+    "3.14",
+    "3.16",
+    "3.18",
+    "3.20",
+    "3.22"
+   ],
+  "url": "https://github.com/lvitals/gnome-shell-extensions",
+  "uuid": "topicons@leavitals.gmail.com",
+  "version": -1,
+  "gettext-domain": "topicons",
+  "settings-schema": "org.gnome.shell.extensions.topicons"
+}
