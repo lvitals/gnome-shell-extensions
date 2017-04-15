@@ -1,0 +1,7 @@
+.label-shadow {
+	color: transparent;
+}
+
+.panel-button #appMenuIcon {
+	app-icon-bottom-clip: 0px;
+}

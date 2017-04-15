@@ -1,12 +1,12 @@
 # Install directory
 EXT_DIR=$(HOME)/.local/share/gnome-shell/extensions
-EXT_NAME=topicons@leavitals.gmail.com
+EXT_NAME=smallpanelicon@leavitals.gmail.com
 
 .PHONY: build clean install uninstall fetch-updates update default
 
 build:
 	mkdir -vp build
-	cp -vr extension.js metadata.json build
+	cp -vr extension.js stylesheet.css metadata.json build
 	#glib-compile-schemas build/schemas
 
 clean:
