@@ -13,17 +13,12 @@ const QuickLaunch = new Lang.Class({
     Extends: PanelMenu.Button,
 
     _init: function(){
-        this.parent(0.0, _("QuickLaunch"));        
-
-        // let hbox = new St.BoxLayout({ style_class: 'panel-status-menu-box' });
+        this.parent(0.0, _("QuickLaunch"));
 
         this._icon = new St.Icon({ 
                             gicon: Gio.icon_new_for_string(iconPath),
                             style_class: 'launch-icon',
                         });
-
-        // hbox.add_child(this._icon);
-        // this.actor.add_actor(hbox);
 
         this.actor.add_actor(this._icon);
         this.actor.connect('button-press-event', Lang.bind(this, this._showApps));
