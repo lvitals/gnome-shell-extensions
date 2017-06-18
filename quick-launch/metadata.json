@@ -1,0 +1,15 @@
+{
+  "description": "Hide activities button and show all apps in an overview when clicking the 'Launch' button on the upper left corner. To disable top left hot corner use 'No Topleft Hot Corner'.", 
+  "name": "Quick Launch", 
+  "shell-version": [
+    "3.10", 
+    "3.12", 
+    "3.14", 
+    "3.16", 
+    "3.18", 
+    "3.20"
+  ], 
+  "url": "", 
+  "uuid": "quick-launch@leavitals.gmail.com", 
+  "version": 1
+}
