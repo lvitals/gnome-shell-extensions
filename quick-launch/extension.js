@@ -1,73 +1,106 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Main = imports.ui.main;
+const Lang = imports.lang;
+const PanelMenu = imports.ui.panelMenu;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const iconPath = Me.path + '/icons/quickapp-icons-symbolic.svg';
 
 
-let button;
+const QuickLaunch = new Lang.Class({
+    Name: 'QuickLaunch',
+    Extends: PanelMenu.Button,
 
-function _showApps() {
-    if (Main.overview.visible) {
-        Main.overview.toggle();
-    } else { 
-        Main.overview.viewSelector.showApps();
-    }
-}
+    _init: function(){
+        this.parent(0.0, _("QuickLaunch"));        
 
-function init() {
-    button = new St.Bin({ style_class: 'launch-button',
-                          reactive: true,
-                          can_focus: true,
-                          x_fill: true,
-                          y_fill: false,
-                          track_hover: true });
-    let icon = new St.Icon({ 
+        // let hbox = new St.BoxLayout({ style_class: 'panel-status-menu-box' });
+
+        this._icon = new St.Icon({ 
                             gicon: Gio.icon_new_for_string(iconPath),
-                            style_class: 'launch-icon' });
+                            style_class: 'launch-icon',
+                        });
 
-    button.set_child(icon);
-    button.connect('button-press-event', _showApps);
+        // hbox.add_child(this._icon);
+        // this.actor.add_actor(hbox);
 
+        this.actor.add_actor(this._icon);
+        this.actor.connect('button-press-event', Lang.bind(this, this._showApps));
 
-    // store the values we are going to override
-    old_x = Main.overview.viewSelector.actor.x;
-    old_width = Main.overview.viewSelector.actor.get_width();
+        this.old_x = Main.overview.viewSelector.actor.x;
+        this.old_width = Main.overview.viewSelector.actor.get_width();
 
+        this._hideDash();
 
-}
+    },
+    _showApps: function() {
+        if (Main.overview.visible) {
+            Main.overview.toggle();
+        } else { 
+            Main.overview.viewSelector.showApps();
+        }
+
+    },
+    _hideDash: function() {
+        // Hide usual Dash
+        Main.overview._dash.actor.hide();
+        Main.overview.viewSelector.actor.set_x(0);
+	    Main.overview.viewSelector.actor.set_width(0);
+	    Main.overview.viewSelector.actor.queue_redraw();
+
+    },
+    _showDash: function() {
+        // Show usual Dash
+        Main.overview._controls.dash.actor.show();
+        Main.overview.viewSelector.actor.set_x(this.old_x);
+        Main.overview.viewSelector.actor.set_width(this.old_width);
+        Main.overview.viewSelector.actor.queue_redraw();
+        
+    },
+    destroy: function() {
+        this._showDash();
+        this.parent();
+    },
+
+});
+
+let _quickLaunch;
 
 function enable() {
-    Main.panel._leftBox.insert_child_at_index(button, 1);
-{
-    let indicator = Main.panel.statusArea['activities'];
+    _quickLaunch = new QuickLaunch();
+    Main.panel.addToStatusArea('QuickLaunch', _quickLaunch, 1, 'left');
 
-    // Hide usual Dash
-    Main.overview._dash.actor.hide();
-    Main.overview.viewSelector.actor.set_x(0);
-	Main.overview.viewSelector.actor.set_width(0);
-	Main.overview.viewSelector.actor.queue_redraw();
+    let indicator = Main.panel.statusArea['activities'];
 
     if(indicator != null) {
         indicator.container.hide();
     }
-  }
+
 }
 
 function disable() {
-    Main.panel._leftBox.remove_child(button);
 
-    // Show usual Dash
-    Main.overview._controls.dash.actor.show();
-    Main.overview.viewSelector.actor.set_x(old_x);
-    Main.overview.viewSelector.actor.set_width(old_width);
-    Main.overview.viewSelector.actor.queue_redraw();
+    _quickLaunch.destroy();
 
-{
 	let indicator = Main.panel.statusArea['activities'];
+
     if(indicator != null) {
         indicator.container.show();
     }
-  }
+  
 }
+
+function init(metadata) {
+
+}
+
+
+
+
+
+
+
+
+
+
